@@ -71,3 +71,7 @@ gh repo clone V1rtualAx3/get-started
 getPrintInfo "Execution of get-started ------------------------- [PR]"
 cd /tmp
 sudo get-started.sh
+
+getPrintInfo "Delete get-started sources ----------------------- [AR]"
+cd ~/
+sudo rm -Rf /tmp/get-started
