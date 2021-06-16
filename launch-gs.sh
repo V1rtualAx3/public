@@ -94,7 +94,7 @@ getCheckError
 
 getPrintInfo "Enter your access token -------------------------- [PR]"
 read -s -e -p "Please enter your access token : " vAccessToken
-echo $vAccessToken > access-token.
+echo $vAccessToken > access-token.txt
 echo ""
 
 getPrintInfo "Github login ------------------------------------- [PR]"
