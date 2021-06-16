@@ -69,7 +69,7 @@ sudo dnf install -y gh
 getCheckError
 
 getPrintInfo "Enter your access token -------------------------- [PR]"
-read -e -p "Please enter your access token : " vAccessToken
+read -s -e -p "Please enter your access token : " vAccessToken
 echo $vAccessToken > access-token.txt
 
 getPrintInfo "Github login ------------------------------------- [PR]"
