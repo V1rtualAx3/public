@@ -30,7 +30,6 @@ sDateFile=$(date +'%d%m%d') # Format date for file name : 010110
 sLogFile="/var/log/${sName}_${sDateFile}.log"
 
 # [v] - Standard variables
-vPassphrase=$(tr -dc A-Za-z0-9 </dev/urandom | head -c 20 ; echo '')
 
 # *FUNCTIONS* #
 
