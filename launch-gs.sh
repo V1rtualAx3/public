@@ -60,8 +60,13 @@ getCheckError () {
 
 # *SCRIPT* #
 getPrintInfo "Generation keys for GitHub ----------------------- [PR]"
-ssh-keygen -t ed25519 -b 4096 -N "" -f ~/.ssh/id_ed25519
-getCheckError
+if [ -f ~/.ssh/id_ed25519 ]; then
+    ssh-keygen -q -t ed25519 -b 4096 -N "" -f ~/.ssh/id_ed25519 <<< y
+    getCheckError
+else
+    ssh-keygen -q -t ed25519 -b 4096 -N "" -f ~/.ssh/id_ed25519
+    getCheckError
+fi
 
 getPrintWarn "Display the public key --------------------------- [PR]"
 echo ""
