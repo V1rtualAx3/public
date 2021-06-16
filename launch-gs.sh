@@ -59,6 +59,21 @@ getCheckError () {
 }
 
 # *SCRIPT* #
+getPrintInfo "Generation keys for GitHub ----------------------- [PR]"
+ssh-keygen -t ed25519 -b 4096 -N "" -f ~/.ssh/id_ed25519
+getCheckError
+
+getPrintWarn "Display the public key --------------------------- [PR]"
+echo ""
+echo "###########################################################"
+echo "#                     Your public key                     #"
+echo "# Please retrive it and paste it into your GitHub account #"
+echo "###########################################################"
+echo ""
+cat ~/.ssh/id_ed25519.pub
+echo ""
+read -n 1 -r -s -p "Press enter to continue..."
+echo ""
 
 getPrintInfo "Add gh-cli repository ---------------------------- [PR]"
 sudo dnf config-manager -y --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
@@ -68,9 +83,13 @@ getPrintInfo "Install gh-cli ----------------------------------- [PR]"
 sudo dnf install -y gh
 getCheckError
 
+getPrintInfo "Configuration of gh-cli -------------------------- [PR]"
+gh config set git_protocol ssh -h github.com
+getCheckError
+
 getPrintInfo "Enter your access token -------------------------- [PR]"
 read -s -e -p "Please enter your access token : " vAccessToken
-echo $vAccessToken > access-token.txt
+echo $vAccessToken > access-token.
 echo ""
 
 getPrintInfo "Github login ------------------------------------- [PR]"
