@@ -60,13 +60,33 @@ getCheckError () {
 
 # *SCRIPT* #
 
-getPrintInfo "Install pre-requisite ---------------------------- [PR]"
-sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
-sudo dnf install gh
+getPrintInfo "Add gh-cli repository ---------------------------- [PR]"
+sudo dnf config-manager -y --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
+getCheckError
+
+getPrintInfo "Install gh-cli ----------------------------------- [PR]"
+sudo dnf install -y gh
+getCheckError
+
+getPrintInfo "Enter your access token -------------------------- [PR]"
+read -e -p "Please enter your access token : " vAccessToken
+echo $vAccessToken > access-token.txt
+
+getPrintInfo "Github login ------------------------------------- [PR]"
+gh auth login --with-token < access-token.txt
+getCheckError
+rm -f access-token.txt
+
+if [ -d /tmp/get-started ]; then
+    getPrintInfo "Remove old source -------------------------------- [PR]"
+    rm -Rf /tmp/get-started
+    getCheckError
+fi
 
 getPrintInfo "Clone get-started sources ------------------------ [PR]"
 cd /tmp
 gh repo clone V1rtualAx3/get-started
+getCheckError
 
 getPrintInfo "Execution of get-started ------------------------- [PR]"
 cd /tmp
