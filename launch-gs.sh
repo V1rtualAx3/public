@@ -114,8 +114,7 @@ gh repo clone V1rtualAx3/get-started
 getCheckError
 
 getPrintInfo "Execution of get-started ------------------------- [PR]"
-cd /tmp
-sudo get-started.sh
+sudo bahs /tmp/get-started/get-started.sh
 
 getPrintInfo "Delete get-started sources ----------------------- [AR]"
 cd ~/
