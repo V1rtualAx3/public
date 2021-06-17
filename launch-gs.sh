@@ -59,18 +59,16 @@ getCheckError () {
 }
 
 # *SCRIPT* #
-getPrintInfo "Generation keys for GitHub ----------------------- [PR]"
-if [ -f ~/.ssh/id_ed25519 ]; then
-    getPrintOk "Skip task"
-    vGitHubKey="yes"
-else
+if [ ! -f ~/.ssh/id_ed25519 ]; then
+    getPrintInfo "Generation keys for GitHub ----------------------- [PR]"
     ssh-keygen -q -t ed25519 -b 4096 -N "" -f ~/.ssh/id_ed25519
     getCheckError
+else
+    vGitHubKey="yes"
 fi
 
-getPrintWarn "Display the public key --------------------------- [PR]"
-if [ $vGitHubKey == "yes" ]; then
-    getPrintOk "Skip task"
+if [ $vGitHubKey != "yes" ]; then
+    getPrintWarn "Display the public key --------------------------- [PR]"
 else
     echo ""
     echo "###########################################################"
@@ -114,7 +112,7 @@ fi
 
 getPrintInfo "Clone get-started sources ------------------------ [PR]"
 cd /tmp
-gh repo clone V1rtualAx3/get-started
+gh repo clone V1rtualAx3/get-started > /dev/null 2>&1
 getCheckError
 
 getPrintInfo "Execution of get-started ------------------------- [PR]"
