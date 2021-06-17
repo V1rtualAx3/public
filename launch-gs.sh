@@ -117,6 +117,17 @@ getCheckError
 getPrintInfo "Execution of get-started ------------------------- [PR]"
 sudo bash /tmp/get-started/get-started.sh
 
+echo""
+getPrintWarn "### AFTER RUN TASKS - Please do not stop the script ###"
+echo""
+
 getPrintInfo "Delete get-started sources ----------------------- [AR]"
 cd ~/
 sudo rm -Rf /tmp/get-started
+
+getPrintInfo "Update system ------------------------------------ [AR]"
+sudo dnf update --quiet -y > /dev/null 2>&1
+getCheckError
+
+getPrintInfo "Reboot in 30 seconds ----------------------------- [AR]"
+sleep 30s && reboot
