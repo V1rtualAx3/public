@@ -69,7 +69,6 @@ fi
 
 if [ $vGitHubKey != "yes" ]; then
     getPrintWarn "Display the public key --------------------------- [PR]"
-else
     echo ""
     echo "###########################################################"
     echo "#                     Your public key                     #"
