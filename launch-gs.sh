@@ -61,31 +61,35 @@ getCheckError () {
 # *SCRIPT* #
 getPrintInfo "Generation keys for GitHub ----------------------- [PR]"
 if [ -f ~/.ssh/id_ed25519 ]; then
-    ssh-keygen -q -t ed25519 -b 4096 -N "" -f ~/.ssh/id_ed25519 <<< y
-    getCheckError
+    getPrintOk "Skip task"
+    vGitHubKey="yes"
 else
     ssh-keygen -q -t ed25519 -b 4096 -N "" -f ~/.ssh/id_ed25519
     getCheckError
 fi
 
 getPrintWarn "Display the public key --------------------------- [PR]"
-echo ""
-echo "###########################################################"
-echo "#                     Your public key                     #"
-echo "# Please retrive it and paste it into your GitHub account #"
-echo "###########################################################"
-echo ""
-cat ~/.ssh/id_ed25519.pub
-echo ""
-read -n 1 -r -s -p "Press enter to continue..."
-echo ""
+if [ $vGitHubKey == "yes" ]; then
+    getPrintOk "Skip task"
+else
+    echo ""
+    echo "###########################################################"
+    echo "#                     Your public key                     #"
+    echo "# Please retrive it and paste it into your GitHub account #"
+    echo "###########################################################"
+    echo ""
+    cat ~/.ssh/id_ed25519.pub
+    echo ""
+    read -n 1 -r -s -p "Press enter to continue..."
+    echo ""
+fi
 
 getPrintInfo "Add gh-cli repository ---------------------------- [PR]"
-sudo dnf config-manager -y --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
+sudo dnf config-manager --quiet -y --add-repo https://cli.github.com/packages/rpm/gh-cli.repo > /dev/null 2>&1
 getCheckError
 
 getPrintInfo "Install gh-cli ----------------------------------- [PR]"
-sudo dnf install -y gh
+sudo dnf install --quiet -y gh > /dev/null 2>&1
 getCheckError
 
 getPrintInfo "Configuration of gh-cli -------------------------- [PR]"
@@ -114,7 +118,7 @@ gh repo clone V1rtualAx3/get-started
 getCheckError
 
 getPrintInfo "Execution of get-started ------------------------- [PR]"
-sudo bahs /tmp/get-started/get-started.sh
+sudo bash /tmp/get-started/get-started.sh
 
 getPrintInfo "Delete get-started sources ----------------------- [AR]"
 cd ~/
