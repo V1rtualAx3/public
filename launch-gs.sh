@@ -118,7 +118,7 @@ getPrintInfo "Execution of get-started ------------------------- [PR]"
 sudo bash /tmp/get-started/get-started.sh
 
 echo""
-getPrintWarn "######## ${cYellow}AFTER RUN TASKS${cNone} ########"
+echo -e "############## ${cYellow}AFTER RUN TASKS${cNone} ##############"
 echo""
 
 getPrintInfo "Delete get-started sources ----------------------- [AR]"
