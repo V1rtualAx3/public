@@ -116,6 +116,7 @@ getCheckError
 
 getPrintInfo "Execution of get-started ------------------------- [PR]"
 sudo bash /tmp/get-started/get-started.sh
+getCheckError
 
 echo""
 echo -e "############## ${cYellow}AFTER RUN TASKS${cNone} ##############"
