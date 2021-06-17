@@ -67,7 +67,7 @@ else
     vGitHubKey="yes"
 fi
 
-if [ $vGitHubKey != "yes" ]; then
+if [ "${vGitHubKey}" != "yes" ]; then
     getPrintWarn "Display the public key --------------------------- [PR]"
     echo ""
     echo "###########################################################"
