@@ -68,7 +68,7 @@ else
 fi
 
 if [ "${vGitHubKey}" != "yes" ]; then
-    getPrintWarn "Display the public key --------------------------- [PR]"
+    getPrintWarn "Display the public key ------------------------ [PR]"
     echo ""
     echo "###########################################################"
     echo "#                     Your public key                     #"
@@ -129,5 +129,5 @@ getPrintInfo "Update system ------------------------------------ [AR]"
 sudo dnf update --quiet -y > /dev/null 2>&1
 getCheckError
 
-getPrintInfo "Reboot in 30 seconds ----------------------------- [AR]"
+getPrintWarn "Reboot in 30 seconds -------------------------- [AR]"
 sleep 30s && reboot
