@@ -132,5 +132,19 @@ getPrintInfo "Update system ------------------------------------ [AR]"
 sudo dnf update --quiet -y > /dev/null 2>&1
 getCheckError
 
-getPrintWarn "Reboot in 30 seconds -------------------------- [AR]"
-sleep 30s && reboot
+getPrintInfo "Reboot ------------------------------------------- [AR]"
+read -e -p "Launch reboot [Y/n] ?" vReboot
+case "$vReboot" in
+    [Yy])
+        echo ""
+        getPrintWarn "Execution of reboot"
+        reboot
+    ;;
+    [Nn])
+        getPrintInfo "Reboot aborted"
+    ;;
+    *)
+        getPrintError "Syntax error, reboot aborted"
+    ;;
+esac
+exit 0
