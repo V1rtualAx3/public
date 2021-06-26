@@ -133,7 +133,7 @@ sudo dnf update --quiet -y > /dev/null 2>&1
 getCheckError
 
 getPrintInfo "Reboot ------------------------------------------- [AR]"
-read -e -p "Launch reboot [Y/n] ?" vReboot
+read -e -p "Launch reboot [Y/n] ? " vReboot
 case "$vReboot" in
     [Yy])
         echo ""
